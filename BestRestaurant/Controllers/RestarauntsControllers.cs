@@ -13,13 +13,25 @@ namespace BestRestaurants.Controllers
 
     public RestaurantsController(BestRestaurantsContext db)
     {
-      _db = db;
+        _db = db;
     }
 
     public ActionResult Index()
     {
-      List<Restaurant> model = _db.Restaurants.Include(cuisines => cuisines.Cuisine).ToList();
-      return View(model);
+        List<Restaurant> model = _db.Restaurants.Include(cuisines => cuisines.Cuisine).ToList();
+        return View(model);
+    }
+     public ActionResult Create()
+    {
+        ViewBag.CuisineId = new SelectList(_db.Cuisines, "CuisineId", "Name");
+        return View();
+    }
+    [HttpPost]
+    public ActionResult Create(Restaurant restaurant)
+    {
+        _db.Restaurants.Add(restaurant);
+        _db.SaveChanges();
+        return RedirectToAction("Index");
     }
   }
 }
