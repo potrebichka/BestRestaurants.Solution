@@ -23,7 +23,7 @@ Extra:
 
 1. Clone this repo:
 ```
-$ git clone https://github.com/potrebichka/BestRestaurant.Solution.git
+$ git clone https://github.com/potrebichka/BestRestaurants.Solution.git
 ```
 
 2. Go into the repo and run this application:
