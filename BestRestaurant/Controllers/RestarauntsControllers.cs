@@ -40,5 +40,18 @@ namespace BestRestaurants.Controllers
         ViewBag.CuisineName = thisCuisine.Name;
         return View(thisRestaurant);
     }
+    public ActionResult Edit(int id)
+    {
+      var thisRestaurant = _db.Restaurants.FirstOrDefault(restaurants => restaurants.RestaurantId == id);
+      ViewBag.CuisineId = new SelectList(_db.Cuisines, "CuisineId", "Name");
+      return View(thisRestaurant);
+    }
+    [HttpPost]
+    public ActionResult Edit(Restaurant restaurant)
+    {
+      _db.Entry(restaurant).State = EntityState.Modified;
+      _db.SaveChanges();
+      return RedirectToAction("Index");
+    }
   }
 }
