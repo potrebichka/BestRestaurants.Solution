@@ -1,6 +1,7 @@
 @{
   Layout = "_Layout";
 }
+@using BestRestaurants.Models;
 
 @model BestRestaurants.Models.Restaurant
 
@@ -11,6 +12,24 @@
 <h3>Cuisine: @ViewBag.CuisineName</h3>
 
 <hr />
-<p>@Html.ActionLink("Edit Restaurant", "Edit", new {id = Model.RestaurantId} )</p>
-<p>@Html.ActionLink("Delete Restaurant", "Delete", new {id = Model.RestaurantId})</p>
-<p>@Html.ActionLink("Back to list", "Index")</p>
+Reviews:
+@if (ViewBag.Reviews.Count == 0)
+{
+  <h3>No reviews have been added to the restaurant!</h3>
+}
+
+@foreach (Review review in ViewBag.Reviews)
+{
+    <hr/>
+    <h3>Name: @review.Name</h3>
+    <h3>Rating: @review.Rating</h3>
+    <h3>Title: @review.Title</h3>
+    <h3>Description: @review.Description</h3>
+    <h3>@Html.ActionLink("Edit this review", "Edit", "Reviews", new {id = Model.RestaurantId}, new {id = review.ReviewId})</h3>
+    <h3>@Html.ActionLink("Delete this review", "Delete", "Reviews", new {id = Model.RestaurantId}, new {id = review.ReviewId})</h3>
+}
+<hr />
+<h3>@Html.ActionLink("Add review", "Create", "Reviews", new {id = Model.RestaurantId} )</h3>
+<h3>@Html.ActionLink("Edit Restaurant", "Edit", new {id = Model.RestaurantId} )</h3>
+<h3>@Html.ActionLink("Delete Restaurant", "Delete", new {id = Model.RestaurantId})</h3>
+<h3>@Html.ActionLink("Back to list", "Index")</h3>

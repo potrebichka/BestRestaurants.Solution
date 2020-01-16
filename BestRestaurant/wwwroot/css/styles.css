@@ -11,3 +11,7 @@ div#footer {
 body {
     text-align: center;
 }
+
+h1 {
+    background-color: #333;
+}
