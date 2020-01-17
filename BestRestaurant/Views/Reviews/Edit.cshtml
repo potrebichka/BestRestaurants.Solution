@@ -1,0 +1,30 @@
+@{
+    Layout = "_Layout";
+}
+@model BestRestaurants.Models.Review
+
+<h2>Edit</h2>
+
+<h4>Edit this review for @ViewBag.restaurantName</h4>
+
+@using (Html.BeginForm())
+{
+    @Html.HiddenFor(model => model.ReviewId)
+
+    @Html.LabelFor(model => model.Name)
+    @Html.EditorFor(model => model.Name)
+
+    @Html.LabelFor(model => model.Rating)
+    @Html.TextBoxFor(model => model.Rating)
+
+    @Html.LabelFor(model => model.Title)
+    @Html.TextBoxFor(model => model.Title)
+
+    @Html.LabelFor(model => model.Description)
+    @Html.TextBoxFor(model => model.Description)
+
+    <input type="hidden" value="@ViewBag.restaurantId" name="RestaurantId"/>
+
+    <input type="submit" value="Save" />
+}
+<p>@Html.ActionLink("Back to list", "Index")</p>

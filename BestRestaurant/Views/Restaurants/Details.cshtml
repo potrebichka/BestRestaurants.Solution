@@ -25,8 +25,8 @@ Reviews:
     <h3>Rating: @review.Rating</h3>
     <h3>Title: @review.Title</h3>
     <h3>Description: @review.Description</h3>
-    <h3>@Html.ActionLink("Edit this review", "Edit", "Reviews", new {id = Model.RestaurantId}, new {id = review.ReviewId})</h3>
-    <h3>@Html.ActionLink("Delete this review", "Delete", "Reviews", new {id = Model.RestaurantId}, new {id = review.ReviewId})</h3>
+    <h3>@Html.ActionLink("Edit this review", "Edit", "Reviews", new {id = review.ReviewId})</h3>
+    <h3>@Html.ActionLink("Delete this review", "Delete", "Reviews", new {id = review.ReviewId})</h3>
 }
 <hr />
 <h3>@Html.ActionLink("Add review", "Create", "Reviews", new {id = Model.RestaurantId} )</h3>

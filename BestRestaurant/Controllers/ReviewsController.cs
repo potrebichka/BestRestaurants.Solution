@@ -30,9 +30,40 @@ namespace BestRestaurants.Controllers
     [HttpPost]
     public ActionResult Create(Review review)
     {
-        _db.Reviews.Add(review);
-        _db.SaveChanges();
-        return RedirectToAction("Details", "Restaurants", new {id = review.RestaurantId} );
+      _db.Reviews.Add(review);
+      _db.SaveChanges();
+      return RedirectToAction("Details", "Restaurants", new {id = review.RestaurantId} );
+  }
+    public ActionResult Edit(int id)
+    {
+      Review thisReview = _db.Reviews.FirstOrDefault(review => review.ReviewId == id);
+      Restaurant thisRestaurant = _db.Restaurants.FirstOrDefault(restaurant => restaurant.RestaurantId == thisReview.RestaurantId);
+      ViewBag.restaurantName = thisRestaurant.Name;
+      ViewBag.restaurantId = thisRestaurant.RestaurantId;
+      return View(thisReview);
+    }
+    [HttpPost]
+    public ActionResult Edit(Review review)
+    {
+      _db.Entry(review).State = EntityState.Modified;
+      _db.SaveChanges();
+      return RedirectToAction("Details", "Restaurants", new {id = review.RestaurantId});
+    }
+    public ActionResult Delete(int id)
+    {
+      Review thisReview = _db.Reviews.FirstOrDefault(review => review.ReviewId == id);
+      Restaurant thisRestaurant = _db.Restaurants.FirstOrDefault(restaurant => restaurant.RestaurantId == thisReview.RestaurantId);
+      ViewBag.restaurantName = thisRestaurant.Name;
+      ViewBag.restaurantId = thisRestaurant.RestaurantId;
+      return View(thisReview);
+    }
+    [HttpPost, ActionName("Delete")]
+    public ActionResult DeleteConfirmed(int id)
+    {
+      var thisReview = _db.Reviews.FirstOrDefault(reviews => reviews.ReviewId == id);
+      _db.Reviews.Remove(thisReview);
+      _db.SaveChanges();
+      return RedirectToAction("Details", "Restaurants", new {id = thisReview.RestaurantId});
     }
   }
 }
